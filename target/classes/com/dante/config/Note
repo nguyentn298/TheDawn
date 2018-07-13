@@ -1,0 +1,24 @@
+1/ @Configuration: 
+
+	The @Configuration annotation indicates that this class declares one or more @Bean methods 
+	and may be processed by the spring container to generate bean definitions 
+	and service requests for those beans at runtime.
+
+2/ @EnableWebMvc:
+
+	The @EnableWebMvc enables support for the @Controller annotation 
+	that uses @RequestMapping to map incomming requests to specific methods.
+
+3/ @ComponentScan:
+
+	The @ComponentScan will instruct spring which packages it may scan to discover spring annotated beans.
+
+4/ InternalResourceViewResolver:
+
+	The InternalResourceViewResolver will prefix and suffix the return value of the controller 
+	to construct the real path of the view file.
+5/ @Controller: 
+
+	By annotating the class with @Controller annotation – which is a stereo type annotation used to indicate that 
+	this is a controller – the dispatcher servlet will automatically map the methods defined in the class 
+	using the @RequestMapping annotation.

@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort;
 
 import com.dante.db.mongodb.model.Person;
 import com.dante.db.mongodb.repository.CrudWithMongoRepository;
-import com.dante.db.mongodb.repository.CrudWithMongoRepositoryService;
 import com.dante.test.TestOperator;
 
 public class testMongoRepository extends TestOperator {
@@ -19,9 +18,6 @@ public class testMongoRepository extends TestOperator {
 	@Autowired
 	CrudWithMongoRepository crudWithMongoRepository;
 	
-	@Autowired
-	CrudWithMongoRepositoryService crudWithMongoRepositoryService;
-
 	/**
 	 * Custom query
 	 */

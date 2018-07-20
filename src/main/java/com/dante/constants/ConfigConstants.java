@@ -11,6 +11,9 @@ public interface ConfigConstants {
 	public static final String DAWN_DB_PASS_2 = "dawn2.database.password";
 	public static final String DAWN_DB_URL_2 = "dawn2.database.url";
 	
+	public static final String MONGO_DB_HOST = "mongo.db.host";
+	public static final String MONGO_DB_NAME = "mongo.db.name";
+	
 	interface Uri {
 		final String CLASSPATH_CONFIG = "classpath:/com/dante/config/config.properties";
 

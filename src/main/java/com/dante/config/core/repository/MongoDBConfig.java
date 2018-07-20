@@ -1,10 +1,14 @@
 package com.dante.config.core.repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
+import com.dante.constants.ConfigConstants;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 
@@ -15,16 +19,20 @@ import com.mongodb.MongoClient;
  */
 @Configuration
 @EnableMongoRepositories(basePackages = "com.dante.db.mongodb.repository") // use repository here, not mongotemplate
+@PropertySource("classpath:/com/dante/config/core/config.properties")
 public class MongoDBConfig {
+
+	@Autowired
+	Environment environment;
 
 	@Bean
 	public Mongo mongo() throws Exception {
-		return new MongoClient("localhost");
+		return new MongoClient(environment.getProperty(ConfigConstants.MONGO_DB_HOST));
 	}
 
 	@Bean
 	public MongoTemplate mongoTemplate() throws Exception {
-		return new MongoTemplate(mongo(), "test");
+		return new MongoTemplate(mongo(), environment.getProperty(ConfigConstants.MONGO_DB_NAME));
 	}
 }
 

@@ -1,0 +1,44 @@
+	/**
+	 * ======================= Byte Stream(Unbuffered streams): 
+	 * 
+	 * Programs use byte streams to perform input and output of 8-bit bytes
+	 * Byte streams should only be used for the most primitive I/O.
+	 * If a file contains character data, the best approach is to use character streams
+	 * 
+	 * ======================= Character Stream(Unbuffered streams):
+	 * 
+	 * In copyFileByCharacterStream above, the int variable holds a character value in its last 16 bits; 
+	 * In CopyFileByByteStream above, the int variable holds a byte value in its last 8 bits.
+	 * Use BufferedReader if want to read file by line because of "line-oriented I/O"
+	 * If a file contains character data, the best approach is to use character streams
+	 * 
+	 * ======================= Buffered Stream:
+	 * 
+	 * Most of the examples we've seen so far use unbuffered I/O. 
+	 * This means each read or write request is handled directly by the underlying OS. 
+	 * This can make a program much less efficient, since each such request often triggers disk access, network activity, 
+	 * or some other operation that is relatively expensive.
+	 * Use Buffered Stream to reduce it.
+	 * 
+	 * There are four buffered stream classes used to wrap unbuffered streams: 
+	 * BufferedInputStream and BufferedOutputStream create buffered byte streams, 
+	 * while BufferedReader and BufferedWriter create buffered character streams.
+	 * 
+	 * ====================== FLUSH:
+	 * Why use flush on stream?
+	 * when we give any command ,the streams of that command is stored in the memory location called buffer(a temporary memory location) in our computer.
+	 * when all the temporary memory location are full then we use flush() which flushes all the streams of data and executes them completely 
+	 * and gives a new space to new streams in buffer temporary location
+	 * 
+	 * NOTE:
+
+		NIO allows you to manage multiple channels using only a single (or fewer) threads, 
+		but the cost is that parsing the data might be somewhat more complicated than when reading data from a blocking stream using standard IO.
+		
+		If you need to manage thousands of open connections simultaneously, which each only send a little data, for instance a chat server, 
+		implementing the server in NIO is probably an advantage. Similarly, if you need to keep a lot of open connections to other computers, 
+		e.g. in a P2P network, using a single thread to manage all of your outbound connections might be an advantage.
+		
+		If you have fewer connections with very high bandwidth, sending a lot of data at a time, standard IO server implementation should be your choice.
+
+	 */

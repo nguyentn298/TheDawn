@@ -4,6 +4,7 @@ import java.net.UnknownHostException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,21 +26,27 @@ public class TestMongoTemplate extends TestOperator {
 
 	@Autowired
 	CrudWithMongoTemplate crudWithMongoTemplate;
-	
+
 	Query query;
 	Update update;
 
 	@Before
 	public void buildQueryAndUpdate() {
+		System.out.println("Start Crud with Mongo Template");
 		query = new Query();
 		update = new Update();
+	}
+	
+	@After
+	public void closeTest() {
+		System.out.println("Finish Crud with Mongo Template");
 	}
 
 	@Test
 	public void countAllItem() {
 		System.out.println("Number of Item: " + crudWithMongoTemplate.countAllPersons());
 	}
-	
+
 	@Test
 	public void testInsertItem() {
 		Person person = new Person("nguyen222");
@@ -53,7 +60,7 @@ public class TestMongoTemplate extends TestOperator {
 		List<Person> person = crudWithMongoTemplate.readFirstItem(query);
 		System.out.println(person);
 	}
-	
+
 	@Test
 	public void testFindAll() {
 		List<Person> list = crudWithMongoTemplate.readAllItem();
@@ -61,7 +68,7 @@ public class TestMongoTemplate extends TestOperator {
 			System.out.println(person);
 		}
 	}
-	
+
 	@Test
 	public void testUpdateFirstItem() {
 		query.addCriteria(Criteria.where("name").is("testUpdate"));
@@ -92,7 +99,7 @@ public class TestMongoTemplate extends TestOperator {
 		update.set("name", "testUpdate22");
 		crudWithMongoTemplate.updateOrCreate(query, update);
 	}
-	
+
 	@Test
 	public void testDeleteItem() {
 		query.addCriteria(Criteria.where("name").is("testDelete"));
@@ -107,8 +114,9 @@ public class TestMongoTemplate extends TestOperator {
 		List<Person> list = mongoOps.findAll(Person.class);
 		System.out.println(list);
 	}
-	
+
 	public static void main(String[] args) throws UnknownHostException {
 		testInsert();
 	}
+
 }

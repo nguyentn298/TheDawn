@@ -29,13 +29,13 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
  */
 @Configuration
 @EnableTransactionManagement
+@ComponentScan({ "com.dante.*" })
+@PropertySource("classpath:/com/dante/config/core/config.properties")
 @EnableJpaRepositories(
 		basePackages = "com.dante.db.dawn.repository",
 		entityManagerFactoryRef = "dawnEntityManagerFactory", 
 		transactionManagerRef = "dawnTransactionManager"
 )
-@ComponentScan({ "com.dante.*" })
-@PropertySource("classpath:/com/dante/config/core/config.properties")
 public class DawnRepositoryConfig {
 
 	/**
@@ -68,11 +68,14 @@ public class DawnRepositoryConfig {
 
 	private static final String DAWN_SCAN_PACKAGE = "com.dante.db.dawn";
 
+	/**
+	 * Use environment to get variable from config file.
+	 */
 	@Autowired
 	Environment environment;
 
 	// Add lib: spring-data-commons-1.11.2.RELEASE
-	// Use @Primary when not give specific repository 
+	// Use @Primary when not give specific repository (when system has more repositories)
 	@Bean
 	@Primary
 	PlatformTransactionManager dawnTransactionManager() {

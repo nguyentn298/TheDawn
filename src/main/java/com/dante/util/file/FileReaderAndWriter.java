@@ -409,6 +409,14 @@ public class FileReaderAndWriter {
 	 * Support read and write String and primitive type (boolean, char, byte, short, int, long, float, and double)
 	 * Then DataStreams opens an output stream. Since a DataOutputStream can only be created as a wrapper for an existing byte stream object not character stream
 	 * stream.readUTF(); ==> read String
+	 * 
+	 * ======================= Object Stream:
+	 * All the primitive data I/O methods covered in Data Streams are also implemented in object streams
+	 * Just as data streams support I/O of primitive data types, object streams support I/O of objects. 
+	 * Most, but not all, standard classes support serialization of their objects. 
+	 * Those that do implement the marker interface Serializable.
+	 * 
+	 * IMPORTANT: Class must implementeds Serializable to use Object Stream.
 	 */
 
 }

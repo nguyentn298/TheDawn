@@ -32,6 +32,7 @@ public class FileReaderAndWriter {
 
 	@Before
 	public void buildFile() {
+
 		file = new File("D:\\Nguyen\\test\\output.txt");
 		content = "Test With Unit Test";
 		
@@ -46,6 +47,7 @@ public class FileReaderAndWriter {
 		}
 
 		System.out.println(String.format("File = [%s], Content = [%s]", file.getAbsolutePath(), content));
+
 	}
 	
 	@Test
@@ -62,6 +64,7 @@ public class FileReaderAndWriter {
 		} catch (Exception e) {
 			
 		}
+
 	}
 
 	/**
@@ -93,6 +96,7 @@ public class FileReaderAndWriter {
 			}
 			
 		}
+
 	}
 
 	/**
@@ -111,11 +115,12 @@ public class FileReaderAndWriter {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	@Test
 	public void writeFileByDataStream() {
-		
+
 		double[] prices = { 19.99, 9.99, 15.99, 3.99, 4.99 };
 		int[] units = { 12, 8, 13, 29, 50 };
 		String[] descs = {
@@ -133,12 +138,14 @@ public class FileReaderAndWriter {
 				stream.writeUTF(descs[i]); // write String
 			}
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
+
 	}
 
 	@Test
 	public void writeFilebyObjectStream() {
+
 		BigDecimal[] prices = { new BigDecimal(19.99), new BigDecimal(9.99), new BigDecimal(15.99), new BigDecimal(3.99), new BigDecimal(4.99) };
 		int[] units = { 12, 8, 13, 29, 50 };
 		String[] descs = {
@@ -158,26 +165,31 @@ public class FileReaderAndWriter {
 				stream.writeUTF(descs[i]);
 			}
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
+
 	}
 	
 	@Test
 	public void writeFilebyObjectStreamWithEntity() {
-		
+
 		Company company = new Company();
 		company.setName("League Of Legend");
 		company.setIncome(100000);
 		company.setEmployee(new Employee(2, "Zed", "Assassin"));
 		try(ObjectOutputStream stream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
+
 			stream.writeObject(company);
+
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
+
 	}
 	
 	@Test
 	public void readFileByByteStream() {
+
 		/**
 		 * Programs use byte streams to perform input and output of 8-bit bytes. All byte stream classes are descended from InputStream and OutputStream.
 		 * 
@@ -195,15 +207,15 @@ public class FileReaderAndWriter {
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 	}
 	
 	@Test
 	public void readFileByCharaterStream() {
-		
+
 		/**
 		 * All character stream classes are descended from Reader and Writer. 
 		 * As with byte streams, there are character stream classes that specialize in file I/O: FileReader and FileWriter
@@ -241,11 +253,12 @@ public class FileReaderAndWriter {
 
 	@Test
 	public void readFileByDataStream() {
-		
+
 		double price;
 		int unit;
 		String desc;
-		double total = 0.0;
+		@SuppressWarnings("unused")
+		double total = 0;
 		
 		/**
 		 * Make sure that output types and input types are matched in this way
@@ -270,6 +283,7 @@ public class FileReaderAndWriter {
 		        System.out.format("You ordered [%d] units of [%s] at [$%.2f]%n", unit, desc, price);
 		        total += unit * price;
 		    }
+
 		} catch (EOFException e) {
 			System.out.println(e);
 			System.out.println("WTF??");
@@ -278,6 +292,7 @@ public class FileReaderAndWriter {
 		} catch (IOException e1) {
 			System.out.println(e1);
 		}
+
 	}
 	
 	@Test
@@ -337,7 +352,6 @@ public class FileReaderAndWriter {
 		Company company = new Company();
 		try (ObjectInputStream stream = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)))) {
 
-		
 			while (true) {
 				try {
 					company = (Company) stream.readObject();
@@ -346,7 +360,7 @@ public class FileReaderAndWriter {
 					break;
 				}
 			}
-			
+
 		} catch (EOFException e) {
 			System.out.println(e);
 		} catch (FileNotFoundException e) {
@@ -356,10 +370,11 @@ public class FileReaderAndWriter {
 		} catch (ClassNotFoundException e) {
 			System.out.println(e);
 		}
-		
+
 		Employee employee = company.getEmployee();
 		System.out.format("Company[%s] has income[%d]%n", company.getName(), company.getIncome());
 		System.out.format("EmplyeeId[%d] - EmployeeName[%s] - EmplyeeRole[%s]%n", employee.getId(), employee.getName(), employee.getRole());
+
 	}
 
 	/**

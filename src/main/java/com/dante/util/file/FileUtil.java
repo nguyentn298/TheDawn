@@ -26,31 +26,36 @@ public class FileUtil extends FileReaderAndWriter {
 
 	@Test
 	public void getParentFile() {
+
 		File file = new File("D:/Nguyen/test/user1", "user2/test3.txt");
 		File parentFile = file.getParentFile();
+
 		System.out.println(parentFile.getName());
+
 	}
 
 	@Test
 	public void createFolder() {
+
 		File file = new File("D:/Nguyen/test/user1", "user2/test3");
 		if (!file.exists()) {
 			System.out.println("Creating folder ...");
 			file.mkdirs();
 		}
-
 		System.out.println(file.getAbsolutePath());
+
 	}
 
 	@Test
 	public void createFile() throws IOException {
+
 		File file = new File("D:/Nguyen/test/user1", "user2/test3.txt");
 		if (!file.exists()) {
 			System.out.println("Creating File ...");
 			file.createNewFile();
 		}
-
 		System.out.println(file.getAbsolutePath());
+
 	}
 
 	@Test
@@ -58,7 +63,7 @@ public class FileUtil extends FileReaderAndWriter {
 
 		File input = new File("D:/Nguyen/test/input.txt");
 		File output = new File("D:/Nguyen/test/output.txt");
-		
+
 		if(input == null || input.length() < 1 || !input.exists()) {
 			System.out.println("File's not exist!!!");
 			return;
@@ -82,7 +87,7 @@ public class FileUtil extends FileReaderAndWriter {
 
 	@Test
 	public void copyFileByCharacterStream(){
-		
+
 		File input = new File("D:/Nguyen/test/input.txt");
 		File output = new File("D:/Nguyen/test/output.txt");
 
@@ -98,6 +103,7 @@ public class FileUtil extends FileReaderAndWriter {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
+
 	}
 
 	@Test
@@ -117,11 +123,11 @@ public class FileUtil extends FileReaderAndWriter {
 		
 		System.out.println("size: " + errorFiles.length);
 		
-//		return errorFiles.length > 0;
 	}
 
 	@Test
 	public void getFileAndFolderName() {
+
 		File folder = new File("D:/Nguyen/test");
 
 		/**
@@ -131,8 +137,7 @@ public class FileUtil extends FileReaderAndWriter {
 		for (String string : useList) {
 			System.out.println("All File and Folder: " + string);
 		}
-		
-		
+
 		/**
 		 * Get Specific File and Folder by Name
 		 * Ex: 	Specific File and Folder: input.txt
@@ -148,10 +153,12 @@ public class FileUtil extends FileReaderAndWriter {
 		for (String string : useSpecificList) {
 			System.out.println("Specific File and Folder: " + string);
 		}
+
 	}
-	
+
 	@Test
 	public void getFileOrFolder() {
+
 		File folder = new File("D:/Nguyen/test");
 		File[] useListFile = folder.listFiles();
 
@@ -181,12 +188,14 @@ public class FileUtil extends FileReaderAndWriter {
 		for (File file : useSpecificListFile) {
 			System.out.println("Specific File: " + file);
 		}
+
 	}
 
 	@Test
 	public void getSpecificFile() {
+
 		File folder = new File("D:/Nguyen/test");
-		
+
 		/**
 		 * Get Files by file.list()
 		 */
@@ -222,10 +231,16 @@ public class FileUtil extends FileReaderAndWriter {
 	public void zipFile() throws IOException {
 
 		List<File> files = new ArrayList<File>(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			{
 				add(new File("D:/Nguyen/test/input.txt"));
 				add(new File("D:/Nguyen/test/output.txt"));
 			}
+
 		};
 		File zipfile = new File("D:/Nguyen/test/TestZip");
 
@@ -254,7 +269,7 @@ public class FileUtil extends FileReaderAndWriter {
 		}
 
 	}
-	
+
 	/**
 	 * ======================= Byte Stream(Unbuffered streams): 
 	 * 

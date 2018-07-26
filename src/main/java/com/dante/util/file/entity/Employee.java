@@ -1,5 +1,6 @@
 package com.dante.util.file.entity;
 
+@SuppressWarnings("serial")
 public class Employee implements java.io.Serializable {
 
 	int id;

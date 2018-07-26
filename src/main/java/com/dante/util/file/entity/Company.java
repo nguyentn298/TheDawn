@@ -1,5 +1,6 @@
 package com.dante.util.file.entity;
 
+@SuppressWarnings("serial")
 public class Company implements java.io.Serializable {
 
 	String name;

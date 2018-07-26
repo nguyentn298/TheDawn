@@ -1,4 +1,4 @@
-package com.dante.util;
+package com.dante.util.xml;
 
 import java.io.StringWriter;
 import java.net.MalformedURLException;
@@ -9,48 +9,54 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import com.dante.ws.demo.User;
+import org.junit.Test;
 
 public class XmlUtil {
 
-	public static void main(String[] args) throws MalformedURLException {
-		// convertObjectToXml(new User(1, "testName", "testRole"));
+	@Test
+	public void convertXmlToObjectByURL() throws MalformedURLException {
 
-		URL url = new URL("http://localhost:8080/TheDawn/ws/test/xml");
-		convertXmlToObjectByURL(url);
-	}
-
-	public static User convertXmlToObjectByURL(URL url) {
 		try {
+
+			URL url = new URL("http://localhost:8080/TheDawn/ws/test/xml");
 			JAXBContext jaxbContext = JAXBContext.newInstance(User.class);
 			Unmarshaller unMarshaller = jaxbContext.createUnmarshaller();
 
-			User user = (User) unMarshaller.unmarshal(url);
+			User user = (User) unMarshaller.unmarshal(url);					// unmarshal from url
+//			List<User> users = (List<User>) unMarshaller.unmarshal(file); 	// unmarshal from file
 			System.out.println(user);
-			return user;
+
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
 
-		return null;
 	}
 
-	public static String convertObjectToXml(User user) {
+	@Test
+	public void convertObjectToXml() {
 
+		User user = getUser();
 		StringWriter stringWriter = new StringWriter();
 		try {
+
 			JAXBContext jaxbContext = JAXBContext.newInstance(User.class);
 			Marshaller marshaller = jaxbContext.createMarshaller();
 
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-			marshaller.marshal(user, stringWriter);
+			marshaller.marshal(user, stringWriter);		// marshal to String
+//			marshaller.marshal(user, file); 			// marshal and copy to File
+//			marshaller.marshal(user, System.out);
 
 			System.out.println(stringWriter.toString());
+
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
 
-		return stringWriter.toString();
+	}
+	
+	public User getUser() {
+		return new User(3, "Talon", "Assassin");
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.dante.util;
+package com.dante.util.file;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
